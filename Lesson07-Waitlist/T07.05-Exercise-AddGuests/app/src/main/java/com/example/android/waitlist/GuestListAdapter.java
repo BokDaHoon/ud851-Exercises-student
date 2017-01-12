@@ -56,13 +56,15 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Gues
     public int getItemCount() {
         return mCursor.getCount();
     }
-
-    // TODO (15) Create a new function called swapCursor that takes the new cursor and returns void
     public void swapCursor(Cursor cursor){
-        if(mCursor !=null) mCursor.close();
-        mCursor = cursor;
-        if(cursor != null) this.notifyDataSetChanged();
+        if(mCursor!=null)
+            mCursor.close();
+        mCursor=cursor;
+        if(cursor!=null)
+            this.notifyDataSetChanged();//데이터셋이 바뀐게 있는는지 확인하는 코드.
     }
+    // TODO (15) Create a new function called swapCursor that takes the new cursor and returns void
+
     // TODO (16) Inside, check if the current cursor is not null, and close it if so
 
     // TODO (17) Update the local mCursor to be equal to  newCursor

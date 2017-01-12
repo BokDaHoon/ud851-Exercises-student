@@ -84,22 +84,21 @@ public class MainActivity extends AppCompatActivity implements
         // https://developer.android.com/training/monitoring-device-state/battery-monitoring.html
         // In Android M and beyond you can simply get a reference to the BatteryManager and call
         // isCharging.
-
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+            BatteryManager batteryManager = (BatteryManager) getSystemService(BATTERY_SERVICE);
+            showCharging(batteryManager.isCharging());
+        } else{
+            IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+            Intent intent = registerReceiver(null, intentFilter);
+            int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+            if(status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL)
+                showCharging(true);
+        }
         // TODO (1) Check if you are on Android M or later, if so...
             // TODO (2) Get a BatteryManager instance using getSystemService()
             // TODO (3) Call isCharging on the battery manager and pass the result on to your show
             // charging method
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            BatteryManager batteryManager = (BatteryManager) getSystemService(BATTERY_SERVICE);
-            showCharging(batteryManager.isCharging());
-        }else{
-            IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-            Intent currentBatteryStateIntent = registerReceiver(null, intentFilter);
-            int batterStateInt = currentBatteryStateIntent.getIntExtra(BatteryManager.EXTRA_STATUS,-1);
-            showCharging(batterStateInt == BatteryManager.BATTERY_STATUS_CHARGING ||
-                    batterStateInt == BatteryManager.BATTERY_STATUS_FULL);
 
-        }
         // TODO (4) If your user is not on M+, then...
             // TODO (5) Create a new intent filter with the action ACTION_BATTERY_CHANGED. This is a
             // sticky broadcast that contains a lot of information about the battery state.

@@ -22,50 +22,48 @@
 <!--TODO (5) Remove the xmlns:app declaration, we don't need that anymore-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="16dp">
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <!--TODO (6) Delete this TextView-->
-
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/et_search_box"
         android:textSize="22sp"
-        android:hint="Type query and press search button."/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <!--TODO (7) Add an EditText-->
     <!--TODO (8) Give the EditText an id of @+id/et_search_box-->
     <!--TODO (9) Set the text size to 22sp-->
     <!--TODO (10) Set the width to match_parent and the height to wrap_content-->
     <!--TODO (11) Provide a hint telling the user to enter a query and then click search-->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/tv_url_display"
         android:textSize="22sp"
         android:layout_marginTop="8dp"
-        android:text="URLs will show up here."/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="URL will show up heare when tey click search"/>
     <!--TODO (12) Add a TextView-->
     <!--TODO (13) Give the TextView an id of @+id/tv_url_display-->
     <!--TODO (14) Set the text size to 22sp-->
     <!--TODO (15) Set the width to wrap_content and the height to wrap_content-->
     <!--TODO (16) Give the TextView a top margin of 8dp-->
     <!--TODO (17) Set the text to tell the user their search URL will show up here when they click search-->
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp">
         <TextView
+            android:id="@+id/tv_github_search_results_json"
+            android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_github_search_results_json"
-            android:text="you can search URLs."/>
+            android:text="user makes something"/>
     </ScrollView>
     <!--TODO (18) Add a ScrollView-->
     <!--TODO (19) Set the width to match_parent and the height to wrap_content-->

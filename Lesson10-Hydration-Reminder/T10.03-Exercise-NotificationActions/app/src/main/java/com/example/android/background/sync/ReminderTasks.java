@@ -19,6 +19,7 @@ import android.content.Context;
 
 import com.example.android.background.utilities.NotificationUtils;
 import com.example.android.background.utilities.PreferenceUtilities;
+
 public class ReminderTasks {
 
     public static final String ACTION_INCREMENT_WATER_COUNT = "increment-water-count";
@@ -28,8 +29,8 @@ public class ReminderTasks {
     public static void executeTask(Context context, String action) {
         if (ACTION_INCREMENT_WATER_COUNT.equals(action)) {
             incrementWaterCount(context);
-        } else if(ACTION_DISMISS_NOTIFICATION.equals(action)){
-            NotificationUtils.clearAllNotifications(context);
+        }else if(ACTION_DISMISS_NOTIFICATION.equals(action)){
+            NotificationUtils.clearAllNotification(context);
         }
         //      TODO (3) If the user ignored the reminder, clear the notification
     }
@@ -37,6 +38,6 @@ public class ReminderTasks {
     private static void incrementWaterCount(Context context) {
         PreferenceUtilities.incrementWaterCount(context);
         //      TODO (4) If the water count was incremented, clear any notifications
-        NotificationUtils.clearAllNotifications(context);
+        NotificationUtils.clearAllNotification(context);
     }
 }

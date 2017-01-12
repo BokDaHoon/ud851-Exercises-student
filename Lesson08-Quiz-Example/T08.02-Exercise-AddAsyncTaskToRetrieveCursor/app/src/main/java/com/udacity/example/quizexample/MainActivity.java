@@ -55,9 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the views
         mButton = (Button) findViewById(R.id.button_next);
-
+        new Add().execute();
         // TODO (5) Create and execute your AsyncTask here
-        new Task().execute();
     }
 
     /**
@@ -97,22 +96,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public class Task extends AsyncTask<Void, Void, Cursor>{
+    // TODO (1) Create AsyncTask with the following generic types <Void, Void, Cursor>
+    public class Add extends AsyncTask<Void, Void, Cursor>{
+
         @Override
-        protected Cursor doInBackground(Void... voids) {
+        protected Cursor doInBackground(Void... params) {
             ContentResolver contentResolver = getContentResolver();
-            Cursor cursor = contentResolver.query(DroidTermsExampleContract.CONTENT_URI, null, null, null, null);
+            Cursor cursor = contentResolver.query(DroidTermsExampleContract.CONTENT_URI,null,null,null,null);
             return cursor;
-
         }
-
-        @Override
-        protected void onPostExecute(Cursor cursor) {
+        protected void onPostExecute(Cursor cursor){
             super.onPostExecute(cursor);
             mData = cursor;
         }
     }
-    // TODO (1) Create AsyncTask with the following generic types <Void, Void, Cursor>
     // TODO (2) In the doInBackground method, write the code to access the DroidTermsExample
     // provider and return the Cursor object
     // TODO (4) In the onPostExecute method, store the Cursor object in mData

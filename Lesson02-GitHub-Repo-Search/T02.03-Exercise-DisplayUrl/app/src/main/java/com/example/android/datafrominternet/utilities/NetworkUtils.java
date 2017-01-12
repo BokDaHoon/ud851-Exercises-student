@@ -49,12 +49,12 @@ public class NetworkUtils {
      */
     public static URL buildUrl(String githubSearchQuery) {
         // TODO (1) Fill in this method to build the proper Github query URL
-        Uri uri = Uri.parse(GITHUB_BASE_URL).buildUpon().appendQueryParameter(PARAM_QUERY, githubSearchQuery)
-                .appendQueryParameter(PARAM_SORT, sortBy).build();
-
+        Uri builtUri = Uri.parse(GITHUB_BASE_URL).buildUpon().appendQueryParameter(PARAM_QUERY,githubSearchQuery).appendQueryParameter(PARAM_SORT,sortBy).build();
+        URL url = null;
         try{
-            return  new URL(uri.toString());
-        } catch(MalformedURLException e) {
+            url = new URL(builtUri.toString());
+            return url;
+        }catch(MalformedURLException e){
             e.printStackTrace();
         }
         return null;
