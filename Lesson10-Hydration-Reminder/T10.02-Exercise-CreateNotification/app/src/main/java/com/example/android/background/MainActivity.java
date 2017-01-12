@@ -91,9 +91,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     // TODO (14) Create a method called testNotification that triggers NotificationUtils' remindUserBecauseCharging
-    public void testNotification(View view){
-        NotificationUtils.remindUserBecauseCharging(this);
-    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -113,5 +111,9 @@ public class MainActivity extends AppCompatActivity implements
         } else if (PreferenceUtilities.KEY_CHARGING_REMINDER_COUNT.equals(key)) {
             updateChargingReminderCount();
         }
+    }
+
+    public void testNotification(View view) {
+        NotificationUtils.remindUserBecauseCharging(this);
     }
 }

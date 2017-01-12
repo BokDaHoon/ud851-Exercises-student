@@ -25,7 +25,7 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Gues
     public GuestListAdapter(Context context, Cursor cursor) {
         this.mContext = context;
         // TODO (3) Set the local mCursor to be equal to cursor
-        mCursor = cursor;
+        this.mCursor = cursor;
     }
 
     @Override
@@ -39,18 +39,16 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Gues
     @Override
     public void onBindViewHolder(GuestViewHolder holder, int position) {
         // TODO (5) Move the cursor to the passed in position, return if moveToPosition returns false
-        if(!mCursor.moveToPosition(position)){
+        if(!mCursor.moveToPosition(position))
             return;
-        }
-
         // TODO (6) Call getString on the cursor to get the guest's name
-        String guestName = mCursor.getString(mCursor.getColumnIndex(WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME));
+        String name = mCursor.getString(mCursor.getColumnIndex(WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME));
         // TODO (7) Call getInt on the cursor to get the party size
         int partySize = mCursor.getInt(mCursor.getColumnIndex(WaitlistContract.WaitlistEntry.COLUMN_PARTY_SIZE));
         // TODO (8) Set the holder's nameTextView text to the guest's name
-        holder.nameTextView.setText(guestName);
-        holder.partySizeTextView.setText(String.valueOf(partySize));
+        holder.nameTextView.setText(name);
         // TODO (9) Set the holder's partySizeTextView text to the party size
+        holder.partySizeTextView.setText(String.valueOf(partySize));
     }
 
     @Override

@@ -16,9 +16,10 @@ import com.example.android.waitlist.data.WaitlistDbHelper;
 public class MainActivity extends AppCompatActivity {
 
     private GuestListAdapter mAdapter;
+    private SQLiteDatabase mDb;
 
     // TODO (1) Create a local field member of type SQLiteDatabase called mDb
-    private SQLiteDatabase mDb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,15 +37,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         // TODO (2) Create a WaitlistDbHelper instance, pass "this" to the constructor as context
-        WaitlistDbHelper waitlistDbHelper = new WaitlistDbHelper(this);
+        WaitlistDbHelper dbHelper = new WaitlistDbHelper(this);
         // TODO (3) Get a writable database reference using getWritableDatabase and store it in mDb
-        mDb = waitlistDbHelper.getWritableDatabase();
+        mDb = dbHelper.getWritableDatabase();//권한획득.
         // TODO (4) call insertFakeData from TestUtil and pass the database reference mDb
-        TestUtil.insertFakeData(mDb);
+        TestUtil.insertFakeData(mDb);//db에 정보넣기.
         // TODO (7) Run the getAllGuests function and store the result in a Cursor variable
-        Cursor cursor = getAllGuests();
+        Cursor cursor = getAllGusets();
         // TODO (12) Pass the resulting cursor count to the adapter
-           mAdapter = new GuestListAdapter(this, cursor.getCount());
+        mAdapter = new GuestListAdapter(this, cursor.getCount());
+
         // Link the adapter to the RecyclerView
         waitlistRecyclerView.setAdapter(mAdapter);
 
@@ -60,8 +62,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // TODO (5) Create a private method called getAllGuests that returns a cursor
-    private Cursor getAllGuests(){
-        return mDb.query(WaitlistContract.WaitlistEntry.TABLE_NAME,null, null, null, null, null, WaitlistContract.WaitlistEntry.COLUMN_TIMESTAMP);
+    private Cursor getAllGusets(){
+        return mDb.query(WaitlistContract.WaitlistEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                WaitlistContract.WaitlistEntry.COLUMN_TIMESTAMP);
     }
     // TODO (6) Inside, call query on mDb passing in the table name and projection String [] order by COLUMN_TIMESTAMP
 

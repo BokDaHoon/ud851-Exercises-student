@@ -124,18 +124,20 @@ public class TaskContentProvider extends ContentProvider {
         final SQLiteDatabase db = mTaskDbHelper.getReadableDatabase();
         // TODO (2) Write URI match code and set a variable to return a Cursor
         int match = sUriMatcher.match(uri);
-        Cursor cursor;
-        // TODO (3) Query for the tasks directory and write a default case
-        switch (match){
+        Cursor retCursor;
+        switch(match){
             case TASKS:
-                cursor = db.query(TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                retCursor = db.query(TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             default:
-                throw new UnsupportedOperationException("Wrong uri : " + uri);
+                throw new UnsupportedOperationException("Unknown uri:"+uri);
         }
+
+        // TODO (3) Query for the tasks directory and write a default case
+
         // TODO (4) Set a notification URI on the Cursor and return that Cursor
-        cursor.setNotificationUri(getContext().getContentResolver(), uri);
-        return cursor;
+        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return retCursor;
     }
 
 

@@ -15,13 +15,12 @@
  */
 package com.example.android.recyclerview;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.List;
 
 /**
  * We couldn't come up with a good name for this class. Then, we realized
@@ -40,35 +39,36 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
 
     // TODO (1) Add a private int variable called mNumberItems
     private int mNumberItems;
+
     // TODO (2) Create a constructor for GreenAdapter that accepts an int as a parameter for numberOfItems
     // TODO (3) Store the numberOfItems parameter in mNumberItems
-    GreenAdapter(int numberOfItems){
+    public GreenAdapter(int numberOfItems){
         mNumberItems = numberOfItems;
     }
+
     // TODO (5) Override the onCreateViewHolder method
     // TODO (6) Create and return a new NumberViewHolder within this method
-
     @Override
-    public NumberViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.number_list_item,
-               parent, false);
-        NumberViewHolder numberViewHolder = new NumberViewHolder(view);
-        return numberViewHolder;
-    }
+    public NumberViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
+        Context context = viewGroup.getContext();
+        int layoutIdForListItem = R.layout.number_list_item;
+        LayoutInflater inflater = LayoutInflater.from(context);
+        boolean shouldAttachToParentImmediately = false;
 
+        View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
+        NumberViewHolder viewHolder = new NumberViewHolder(view);
+
+        return viewHolder;
+    }
     // TODO (7) Override onBindViewHolder
     // TODO (8) Within onBindViewHolder, call holder.bind and pass in the position
-
     @Override
-    public void onBindViewHolder(NumberViewHolder holder, int position) {
+    public void onBindViewHolder(NumberViewHolder holder, int position){
         holder.bind(position);
     }
 
-
     // TODO (9) Override getItemCount and return the number of items to display
-
-    @Override
-    public int getItemCount() {
+    public int getItemCount(){
         return mNumberItems;
     }
 

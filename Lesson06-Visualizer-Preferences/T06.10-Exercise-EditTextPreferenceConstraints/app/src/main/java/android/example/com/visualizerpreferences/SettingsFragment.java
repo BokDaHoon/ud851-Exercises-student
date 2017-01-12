@@ -18,8 +18,9 @@ package android.example.com.visualizerpreferences;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.icu.text.NumberFormat;
 import android.os.Bundle;
-import android.support.annotation.FloatRange;
+import android.support.v4.media.MediaBrowserCompat;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
@@ -30,7 +31,7 @@ import android.widget.Toast;
 
 // TODO (1) Implement OnPreferenceChangeListener
 public class SettingsFragment extends PreferenceFragmentCompat implements
-        OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener {
+        OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener{
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
@@ -52,8 +53,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
                 setPreferenceSummary(p, value);
             }
         }
+        Preference preference = findPreference(getString(R.string.pref_size_key));
+        preference.setOnPreferenceChangeListener(this);
         // TODO (3) Add the OnPreferenceChangeListener specifically to the EditTextPreference
-        findPreference(getString(R.string.pref_size_key)).setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -111,16 +113,21 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Toast toast = Toast.makeText(getContext(), "range : 0 ~ 3", Toast.LENGTH_LONG);
-        String sizeKey = getString(R.string.pref_size_key);
-        if(preference.getKey().equals(sizeKey)){
-            float size = Float.parseFloat((String)newValue);
-            if(size <0 || size >3){
-                toast.show();
+        if(preference.getKey().equals(getString(R.string.pref_size_key))){
+            String size = ((String)(newValue)).trim();
+            if(size.equals(""))
+                size="1";
+            try{
+                float check_size = Float.parseFloat(size);
+                if(check_size>3||check_size<=0){
+                    Toast.makeText(getContext(),"must number between 0.1 to 3", Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            }catch (NumberFormatException nfe){
+                Toast.makeText(getContext(),"must number between 0.1 to 3", Toast.LENGTH_LONG).show();
                 return false;
             }
         }
-
         return true;
 
     }

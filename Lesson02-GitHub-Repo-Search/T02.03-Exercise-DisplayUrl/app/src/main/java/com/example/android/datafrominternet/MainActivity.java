@@ -26,6 +26,8 @@ import android.widget.Toast;
 
 import com.example.android.datafrominternet.utilities.NetworkUtils;
 
+import java.net.URL;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText mSearchBoxEditText;
@@ -46,10 +48,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // TODO (2) Create a method called makeGithubSearchQuery
-    // TODO (3) Within this method, build the URL with the text from the EditText and set the built URL to the TextView
-    public void makeGithubSearchQuery(){
-        mUrlDisplayTextView.setText(NetworkUtils.buildUrl(mSearchBoxEditText.getText().toString()).toString());
+    void makeGithubSearchQuery(){
+        String githubQuery = mSearchBoxEditText.getText().toString();
+        URL githubSearchUrl = NetworkUtils.buildUrl(githubQuery);
+        mUrlDisplayTextView.setText(githubSearchUrl.toString());
     }
+    // TODO (3) Within this method, build the URL with the text from the EditText and set the built URL to the TextView
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
