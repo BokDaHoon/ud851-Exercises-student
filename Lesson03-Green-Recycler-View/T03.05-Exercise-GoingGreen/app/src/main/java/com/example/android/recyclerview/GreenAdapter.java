@@ -77,14 +77,18 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
         NumberViewHolder viewHolder = new NumberViewHolder(view);
 
         // TODO (12) Set the text of viewHolderIndex to "ViewHolder index: " + viewHolderCount
-        viewHolder.viewHolderindexTextView.setText("ViewHolder index: " + viewHolderCount);
+        viewHolder.viewHolderIndex.setText("ViewHolder index: " + viewHolderCount);
         // TODO (13) Use ColorUtils.getViewHolderBackgroundColorFromInstance and pass in a Context and the viewHolderCount
+        int backgroundColorForViewHolder = ColorUtils
+                .getViewHolderBackgroundColorFromInstance(context, viewHolderCount);
+
+
         // TODO (14) Set the background color of viewHolder.itemView with the color from above
-        int color = ColorUtils.getViewHolderBackgroundColorFromInstance(context, viewHolderCount);
-        viewHolder.itemView.setBackgroundColor(color);
+        viewHolder.itemView.setBackgroundColor(backgroundColorForViewHolder);
         // TODO (15) Increment viewHolderCount and log its value
         viewHolderCount++;
-        Log.d(TAG, "viewHolderCount : " +  viewHolderCount);
+        Log.d(TAG, "onCreateViewHolder: number of ViewHolders created: "
+                + viewHolderCount);
         return viewHolder;
     }
 
@@ -123,7 +127,7 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
         // Will display the position in the list, ie 0 through getItemCount() - 1
         TextView listItemNumberView;
         // TODO (10) Add a TextView variable to display the ViewHolder index
-        TextView viewHolderindexTextView;
+        TextView viewHolderIndex;
         /**
          * Constructor for our ViewHolder. Within this constructor, we get a reference to our
          * TextViews and set an onClickListener to listen for clicks. Those will be handled in the
@@ -137,7 +141,7 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
             listItemNumberView = (TextView) itemView.findViewById(R.id.tv_item_number);
 
             // TODO (11) Use itemView.findViewById to get a reference to tv_view_holder_instance
-            viewHolderindexTextView = (TextView)itemView.findViewById(R.id.tv_view_holder_instance);
+            viewHolderIndex = (TextView) itemView.findViewById(R.id.tv_view_holder_instance);
         }
 
         /**

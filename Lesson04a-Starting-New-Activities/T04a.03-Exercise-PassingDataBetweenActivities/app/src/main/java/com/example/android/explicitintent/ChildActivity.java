@@ -34,11 +34,13 @@ public class ChildActivity extends AppCompatActivity {
         mDisplayText = (TextView) findViewById(R.id.tv_display);
 
         // TODO (3) Use the getIntent method to store the Intent that started this Activity in a variable
-        Intent startIntent = getIntent();
+        Intent intent = getIntent();
+
         // TODO (4) Create an if statement to check if this Intent has the extra we passed from MainActivity
-        if(startIntent.hasExtra(Intent.EXTRA_TEXT)){
-            String extraText = startIntent.getStringExtra(Intent.EXTRA_TEXT);
-            mDisplayText.setText(extraText);
+        if (intent.hasExtra(Intent.EXTRA_TEXT)) {
+            String text1 = intent.getStringExtra(intent.EXTRA_TEXT);
+
+            mDisplayText.setText(text1);
         }
             // TODO (5) If the Intent contains the correct extra, retrieve the text
 

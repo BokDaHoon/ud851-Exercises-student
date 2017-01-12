@@ -38,9 +38,11 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onClickOpenWebpageButton(View v) {
         // TODO (5) Create a String that contains a URL ( make sure it starts with http:// or https:// )
-        String url = "http://www.naver.com/";
+        String string = "naver.com";
+        openWebPage(string);
+
         // TODO (6) Replace the Toast with a call to openWebPage, passing in the URL String from the previous step
-       openWebPage(url);
+        Toast.makeText(this, "TODO: Open a web page when this button is clicked", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -80,14 +82,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // TODO (1) Create a method called openWebPage that accepts a String as a parameter
-    public void openWebPage (String str){
-        Uri uri = Uri.parse(str);
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        if(intent.resolveActivity(getPackageManager()) != null){
+    // Do steps 2 - 4 within openWebPage
+    public void openWebPage(String url) {
+
+        Uri webpage = Uri.parse(url);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+
+        if(intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
+
     }
-    // Do steps 2 - 4 within openWebPage
 
         // TODO (2) Use Uri.parse to parse the String into a Uri
 

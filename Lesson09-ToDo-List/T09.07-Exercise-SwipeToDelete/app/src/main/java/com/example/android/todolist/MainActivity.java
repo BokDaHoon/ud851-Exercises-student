@@ -80,14 +80,15 @@ public class MainActivity extends AppCompatActivity implements
                 // Here is where you'll implement swipe to delete
 
                 // TODO (1) Construct the URI for the item to delete
-                //[Hint] Use getTag (from the adapter code) to get the id of the swiped item
                 int id = (int) viewHolder.itemView.getTag();
+                //[Hint] Use getTag (from the adapter code) to get the id of the swiped item
+
                 // TODO (2) Delete a single row of data using a ContentResolver
-                String strID = id+"";
+                String stringId = Integer.toString(id);
                 Uri uri = TaskContract.TaskEntry.CONTENT_URI;
-                uri = uri.buildUpon().appendPath(strID).build();
+                uri = uri.buildUpon().appendPath(stringId).build();
+                getContentResolver().delete(uri, null, null);
                 // TODO (3) Restart the loader to re-query for all tasks after a deletion
-                getContentResolver().delete(uri,null,null);
                 getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, MainActivity.this);
             }
         }).attachToRecyclerView(mRecyclerView);

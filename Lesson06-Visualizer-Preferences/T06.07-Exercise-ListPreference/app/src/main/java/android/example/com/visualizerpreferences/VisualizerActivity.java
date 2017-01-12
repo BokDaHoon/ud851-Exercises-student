@@ -33,6 +33,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
 public class VisualizerActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final int MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE = 88;
@@ -47,7 +49,6 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
         setupSharedPreferences();
         setupPermissions();
     }
-
     // TODO (4) Update setupSharedPreferences and onSharedPreferenceChanged to load the color
     // from shared preferences. Call setColor, passing in the color you got
     private void setupSharedPreferences() {
@@ -60,12 +61,11 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
         mVisualizerView.setShowTreble(sharedPreferences.getBoolean(getString(R.string.pref_show_treble_key),
                 getResources().getBoolean(R.bool.pref_show_treble_default)));
         mVisualizerView.setMinSizeScale(1);
-
-        mVisualizerView.setColor(sharedPreferences.getString(getString(R.string.pref_color_key), getString(R.string.pref_color_red_value)));
+        mVisualizerView.setColor(getString(R.string.pref_color_red_value));
+        mVisualizerView.setColor("color");
         // Register the listener
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
-
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
@@ -75,8 +75,6 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
             mVisualizerView.setShowMid(sharedPreferences.getBoolean(key, getResources().getBoolean(R.bool.pref_show_mid_range_default)));
         } else if (key.equals(getString(R.string.pref_show_treble_key))) {
             mVisualizerView.setShowTreble(sharedPreferences.getBoolean(key, getResources().getBoolean(R.bool.pref_show_treble_default)));
-        } else if(key.equals(getString(R.string.pref_color_key))){
-            mVisualizerView.setColor(sharedPreferences.getString(getString(R.string.pref_color_key), getString(R.string.pref_color_red_value)));
         }
     }
 

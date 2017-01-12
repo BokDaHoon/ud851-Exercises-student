@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,43 +48,47 @@ public class MainActivity extends AppCompatActivity {
 
         mLifecycleDisplay = (TextView) findViewById(R.id.tv_lifecycle_events_display);
 
-        // TODO (1) Use logAndAppend within onCreate
         logAndAppend(ON_CREATE);
-    }
-
-    // TODO (2) Override onStart, call super.onStart, and call logAndAppend with ON_START
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        logAndAppend(ON_START);
-    }
-
-    // TODO (3) Override onResume, call super.onResume, and call logAndAppend with ON_RESUME
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        logAndAppend(ON_RESTART);
+        // TODO (1) Use logAndAppend within onCreate
     }
 
     @Override
     protected void onStop() {
-        super.onStop();
         logAndAppend(ON_STOP);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        logAndAppend(ON_RESUME);
+        Toast.makeText(this, "stop", Toast.LENGTH_LONG).show();
+        super.onStop();
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
         logAndAppend(ON_PAUSE);
+        super.onPause();
     }
+
+    @Override
+    protected void onResume() {
+        logAndAppend(ON_RESUME);
+        super.onResume();
+    }
+
+    @Override
+    protected void onStart() {logAndAppend(ON_START);
+        super.onStart();
+    }
+
+
+
+    @Override
+    protected void onRestart() {logAndAppend(ON_RESTART);
+
+        Toast.makeText(this, "restart", Toast.LENGTH_LONG).show();
+        super.onRestart();
+    }
+// TODO (2) Override onStart, call super.onStart, and call logAndAppend with ON_START
+
+    // TODO (3) Override onResume, call super.onResume, and call logAndAppend with ON_RESUME
+
     // TODO (4) Override onPause, call super.onPause, and call logAndAppend with ON_PAUSE
 
     // TODO (5) Override onStop, call super.onStop, and call logAndAppend with ON_STOP
@@ -101,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        logAndAppend(ON_DESTROY);
+        Toast.makeText(this, "Destroy", Toast.LENGTH_LONG).show();
     }
 
     /**

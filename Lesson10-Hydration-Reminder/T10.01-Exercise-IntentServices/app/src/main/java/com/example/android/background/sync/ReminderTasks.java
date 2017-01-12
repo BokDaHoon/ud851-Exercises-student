@@ -4,20 +4,22 @@ import android.content.Context;
 
 import com.example.android.background.utilities.PreferenceUtilities;
 
-// TODO (1) Create a class called ReminderTasks
-public class ReminderTasks{
-    public static final String ACTION_INCREMENT_WATER_COUNT = null;
+public class ReminderTasks {
 
-    public static void executeTask(Context context, String action){
-        if(action.equals(ACTION_INCREMENT_WATER_COUNT)){
+    public static final String ACTION_INCREMENT_WATER_COUNT = "increment-water-count";
+
+    public static void executeTask(Context context, String action) {
+
+        if (ACTION_INCREMENT_WATER_COUNT.equals(action)) {
             incrementWaterCount(context);
         }
     }
-
-    private static void incrementWaterCount(Context context){
+    private static void incrementWaterCount(Context context) {
         PreferenceUtilities.incrementWaterCount(context);
     }
 }
+// TODO (1) Create a class called ReminderTasks
+
 // TODO (2) Create a public static constant String called ACTION_INCREMENT_WATER_COUNT
 
 // TODO (6) Create a public static void method called executeTask

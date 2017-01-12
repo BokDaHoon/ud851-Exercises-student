@@ -17,20 +17,17 @@ package android.example.com.visualizerpreferences;
  */
 
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.support.annotation.FloatRange;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceScreen;
-import android.widget.Toast;
 
 // TODO (1) Implement OnPreferenceChangeListener
 public class SettingsFragment extends PreferenceFragmentCompat implements
-        OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener {
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
@@ -53,7 +50,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
             }
         }
         // TODO (3) Add the OnPreferenceChangeListener specifically to the EditTextPreference
-        findPreference(getString(R.string.pref_size_key)).setOnPreferenceChangeListener(this);
+        Preference preference = findPreference(getString(R.string.pref_size_key));
+        preference.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -90,7 +88,16 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         }
     }
 
-    // TODO (2) Override onPreferenceChange. This method should try to convert the new preference value
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        String sizekey = preference.getKey();
+        if(sizekey == getString(R.string.pref_size_key)){
+            String value = (String) newValue;
+            float size = Float.parseFloat(value);
+        }
+        return true;
+    }
+// TODO (2) Override onPreferenceChange. This method should try to convert the new preference value
     // to a float; if it cannot, show a helpful error message and return false. If it can be converted
     // to a float check that that float is between 0 (exclusive) and 3 (inclusive). If it isn't, show
     // an error message and return false. If it is a valid number, return true.
@@ -107,21 +114,5 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         super.onDestroy();
         getPreferenceScreen().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Toast toast = Toast.makeText(getContext(), "range : 0 ~ 3", Toast.LENGTH_LONG);
-        String sizeKey = getString(R.string.pref_size_key);
-        if(preference.getKey().equals(sizeKey)){
-            float size = Float.parseFloat((String)newValue);
-            if(size <0 || size >3){
-                toast.show();
-                return false;
-            }
-        }
-
-        return true;
-
     }
 }

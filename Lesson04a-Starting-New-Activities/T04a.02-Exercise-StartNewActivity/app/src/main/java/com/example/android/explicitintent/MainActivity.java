@@ -23,7 +23,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,10 +62,14 @@ public class MainActivity extends AppCompatActivity {
                 Context context = MainActivity.this;
 
                 // TODO (1) Store ChildActivity.class in a Class object called destinationActivity
-               Class destinationActivity = ChildActivity.class;
+                Class destinationActivity = ChildActivity.class;
+
                 // TODO (2) Create an Intent to start ChildActivity
+
                 Intent intent = new Intent(context, destinationActivity);
+
                 // TODO (3) Replace the Toast with code to start ChildActivity
+
                 startActivity(intent);
 
             }

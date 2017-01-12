@@ -78,6 +78,24 @@ public class VisualizerActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.visualizer_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.action_settings :
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+        }
+        return true;
+    }
+
     /**
      * App Permissions for Audio
      **/
@@ -128,21 +146,5 @@ public class VisualizerActivity extends AppCompatActivity {
     // orderInCategory should be 100
 
     // TODO (5) Add the menu to the menu bar
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.visualizer_menu, menu);
-        return true;
-    }
-
     // TODO (6) When the "Settings" menu item is pressed, open SettingsActivity
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.setting_String){
-            startActivity(new Intent(this, SettingsActivity.class));
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
